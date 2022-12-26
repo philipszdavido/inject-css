@@ -31,8 +31,9 @@ const messagesFromReactAppListener = (message, sender, response) => {
   };
 
   const getCSS = () => {
-    const styleEl = document.getElementById("injectCSS");
-    return styleEl?.innerText || "";
+    // const styleEl = document.getElementById("injectCSS");
+    // return styleEl?.innerText || "";
+    return localStorage.getItem("css");
   };
 
   const revertCSS = () => {
@@ -56,7 +57,7 @@ const messagesFromReactAppListener = (message, sender, response) => {
     const type = message.type;
     switch (type) {
       case "injectCSS":
-        const cssToInject = message.css;
+        const cssToInject = message.css || localStorage.getItem("css");
         localStorage.setItem("css", cssToInject);
         InjectCSS(cssToInject);
         response(true);
