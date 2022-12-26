@@ -129,3 +129,5 @@ const Alert = ({ msg, open }) => {
 // html {
 //     background: violet !important;
 // }
+// @import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100&display=swap');
+// font-family: 'Chivo Mono', monospace;
