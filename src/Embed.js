@@ -107,8 +107,9 @@ const Embed = () => {
           height="250px"
           width="300px"
           onChange={(editor, data, value) => {
-            changecss(value);
+            changecss(editor);
           }}
+          style={{ fontSize: "larger" }}
         />
       </div>
       <div className="buttonCont">

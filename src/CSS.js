@@ -104,8 +104,9 @@ const CSS = () => {
           }}
           height="250px"
           onChange={(editor, data, value) => {
-            changecss(value);
+            changecss(editor);
           }}
+          style={{ fontSize: "larger" }}
         />
       </div>
       <div className="buttonCont">
