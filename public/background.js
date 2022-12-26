@@ -9,6 +9,14 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         },
         function (response) {}
       );
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        {
+          from: "InjectCSS",
+          type: "injectBgEmbed",
+        },
+        function (response) {}
+      );
     });
   }
 });

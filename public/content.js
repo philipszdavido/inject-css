@@ -53,6 +53,31 @@ const messagesFromReactAppListener = (message, sender, response) => {
     }
   };
 
+  const InjectEmbed = (embed = "") => {
+    const head = document.head || document.getElementsByTagName("head")[0];
+
+    const tempNode = document.createElement("div");
+    tempNode.innerHTML = embed;
+    tempNode.id = "embedNode";
+    const childNodes = tempNode.childNodes;
+
+    // for (const node of childNodes) {
+    // }
+    head.appendChild(tempNode);
+  };
+
+  const getEmbed = () => {
+    return document.getElementById("embedNode").innerHTML;
+  };
+
+  const revertEmbed = () => {
+    const head = document.head || document.getElementsByTagName("head")[0];
+    const embedNode = document.getElementById("embedNode");
+    if (embedNode) {
+      head.removeChild(embedNode);
+    }
+  };
+
   if (sender.id === chrome.runtime.id && message.from === "InjectCSS") {
     const type = message.type;
     switch (type) {
@@ -75,6 +100,28 @@ const messagesFromReactAppListener = (message, sender, response) => {
         InjectCSS(css);
         response(true);
         break;
+
+      case "injectEmbed":
+        const EmbedToInject = message.embed || localStorage.getItem("Embed");
+        localStorage.setItem("Embed", EmbedToInject);
+        InjectEmbed(EmbedToInject);
+        response(true);
+        break;
+
+      case "getEmbed":
+        response(getEmbed());
+        break;
+
+      case "revertEmbed":
+        response(revertEmbed() ? "Done" : "Error");
+        break;
+
+      case "injectBgEmbed":
+        const Embed = localStorage.getItem("Embed");
+        InjectEmbed(Embed);
+        response(true);
+        break;
+
       default:
         break;
     }

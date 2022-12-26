@@ -124,3 +124,25 @@ button:hover {
 .alert-error {
   background: red;
 }
+
+.tabHeadContainer {
+  display: flex;
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 3px;
+}
+
+.tabHeadItem {
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid #aba9a9;
+  margin-right: 2px;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+  border-bottom: unset;
+}
+
+.tabActive {
+  border: 1px solid black;
+  border-bottom: unset;
+}
