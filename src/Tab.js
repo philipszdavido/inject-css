@@ -9,6 +9,7 @@ export const Tab = ({ heads, children }) => {
       <ul className="tabHeadContainer">
         {heads.map((head, i) => (
           <TabHead
+            key={i}
             title={head}
             activeIndex={activeIndex}
             index={i}

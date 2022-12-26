@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import StyleEditor from "react-style-editor";
 import { Alert } from "./Alert";
+import CodeMirror from "@uiw/react-codemirror";
 
 const Embed = () => {
   const [css, setCSS] = useState("");
@@ -96,12 +96,19 @@ const Embed = () => {
     <>
       <Alert open={openAlert} msg={msg} />
       <div className="container">
-        <StyleEditor
-          onChange={changecss}
-          style={{ height: 250 }}
-          //defaultValue={css}
+        <CodeMirror
           value={css}
-          readOnly={false}
+          options={{
+            mode: "html",
+            theme: "dark",
+            lineNumbers: true,
+            linebreak: true,
+          }}
+          height="250px"
+          width="300px"
+          onChange={(editor, data, value) => {
+            changecss(value);
+          }}
         />
       </div>
       <div className="buttonCont">
