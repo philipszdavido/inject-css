@@ -67,7 +67,10 @@ const messagesFromReactAppListener = (message, sender, response) => {
   };
 
   const getEmbed = () => {
-    return document.getElementById("embedNode").innerHTML;
+    return (
+      localStorage.getItem("Embed") ||
+      document.getElementById("embedNode").innerHTML
+    );
   };
 
   const revertEmbed = () => {

@@ -97,7 +97,7 @@ const Embed = () => {
       <Alert open={openAlert} msg={msg} />
       <div className="container">
         <CodeMirror
-          value={css}
+          value={css || ""}
           options={{
             mode: "html",
             theme: "dark",
