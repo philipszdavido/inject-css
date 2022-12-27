@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <div>Inject CSS 💉</div>
+        <div className="headerTitle">Inject CSS 💉</div>
       </header>
 
       <Tab heads={["CSS", "EMBED"]}>
