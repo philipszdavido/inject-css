@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import { Alert } from "./Alert";
+import "./../../App.css";
+import { Alert } from "../Alert/Alert";
 import CodeMirror from "@uiw/react-codemirror";
+import { sendInjectCSSMessage } from "../utils";
 
-const Embed = () => {
+const CSS = () => {
   const [css, setCSS] = useState("");
-
   const [{ openAlert, msg }, setAlert] = useState({
     msg: "",
     openAlert: false,
@@ -32,7 +32,7 @@ const Embed = () => {
   const handleReverFn = () => {
     const message = {
       from: "InjectCSS",
-      type: "revertEmbed",
+      type: "revertCSS",
     };
 
     const queryInfo = {
@@ -50,22 +50,7 @@ const Embed = () => {
   };
 
   const injectCSSFn = () => {
-    const message = {
-      from: "InjectCSS",
-      type: "injectEmbed",
-      embed: css,
-    };
-
-    const queryInfo = {
-      active: true,
-      currentWindow: true,
-    };
-
-    chrome.tabs &&
-      chrome.tabs.query(queryInfo, (tabs) => {
-        const currentTabId = tabs[0].id;
-        chrome.tabs.sendMessage(currentTabId, message, (response) => {});
-      });
+    sendInjectCSSMessage(css);
   };
 
   const changecss = (e) => {
@@ -75,7 +60,7 @@ const Embed = () => {
   useEffect(() => {
     const message = {
       from: "InjectCSS",
-      type: "getEmbed",
+      type: "getCSS",
     };
 
     const queryInfo = {
@@ -102,10 +87,8 @@ const Embed = () => {
             mode: "html",
             theme: "dark",
             lineNumbers: true,
-            linebreak: true,
           }}
           height="250px"
-          width="300px"
           onChange={(editor, data, value) => {
             changecss(editor);
           }}
@@ -113,12 +96,18 @@ const Embed = () => {
         />
       </div>
       <div className="buttonCont">
-        <button onClick={injectCSSFn}>Embed</button>
+        <button onClick={injectCSSFn}>Inject 💉</button>
         <button onClick={handleClick}>Copy</button>
-        <button onClick={handleReverFn}>Un-embed</button>
+        <button onClick={handleReverFn}>Un-inject</button>
       </div>
     </>
   );
 };
 
-export default Embed;
+export default CSS;
+
+{
+  /* <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika&display=swap" rel="stylesheet"></link> */
+}

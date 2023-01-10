@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Tab.css";
 
 export const Tab = ({ heads, children }) => {
   const [activeIndex, setActiveIndex] = useState(0);

@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import { Alert } from "./Alert";
+import "./../../App.css";
+import { Alert } from "../Alert/Alert";
 import CodeMirror from "@uiw/react-codemirror";
+import EmbedPresetsModal from "../Modal/EmbedPresetsModal";
+import { sendInjectCSSMessage, sendInjectEmbedMessage } from "../utils";
 
-const CSS = () => {
+const Embed = () => {
   const [css, setCSS] = useState("");
+
   const [{ openAlert, msg }, setAlert] = useState({
     msg: "",
     openAlert: false,
   });
+  const [openModal, setOpenModal] = useState(false);
 
   const displayAlert = (msg) => {
     setAlert({
@@ -31,7 +35,7 @@ const CSS = () => {
   const handleReverFn = () => {
     const message = {
       from: "InjectCSS",
-      type: "revertCSS",
+      type: "revertEmbed",
     };
 
     const queryInfo = {
@@ -49,22 +53,7 @@ const CSS = () => {
   };
 
   const injectCSSFn = () => {
-    const message = {
-      from: "InjectCSS",
-      type: "injectCSS",
-      css,
-    };
-
-    const queryInfo = {
-      active: true,
-      currentWindow: true,
-    };
-
-    chrome.tabs &&
-      chrome.tabs.query(queryInfo, (tabs) => {
-        const currentTabId = tabs[0].id;
-        chrome.tabs.sendMessage(currentTabId, message, (response) => {});
-      });
+    sendInjectEmbedMessage(css, (response) => {});
   };
 
   const changecss = (e) => {
@@ -74,7 +63,7 @@ const CSS = () => {
   useEffect(() => {
     const message = {
       from: "InjectCSS",
-      type: "getCSS",
+      type: "getEmbed",
     };
 
     const queryInfo = {
@@ -91,9 +80,25 @@ const CSS = () => {
       });
   }, []);
 
+  const handleShowPresets = () => {
+    setOpenModal(true);
+  };
+
+  const setEmbed = (fontSelected) => {
+    sendInjectEmbedMessage(fontSelected?.embed);
+    sendInjectCSSMessage(fontSelected?.css);
+  };
+
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+
   return (
     <>
       <Alert open={openAlert} msg={msg} />
+      {openModal && (
+        <EmbedPresetsModal setEmbed={setEmbed} closeModal={closeModal} />
+      )}
       <div className="container">
         <CodeMirror
           value={css || ""}
@@ -101,8 +106,10 @@ const CSS = () => {
             mode: "html",
             theme: "dark",
             lineNumbers: true,
+            linebreak: true,
           }}
           height="250px"
+          width="300px"
           onChange={(editor, data, value) => {
             changecss(editor);
           }}
@@ -110,18 +117,13 @@ const CSS = () => {
         />
       </div>
       <div className="buttonCont">
-        <button onClick={injectCSSFn}>Inject 💉</button>
+        <button onClick={injectCSSFn}>Embed</button>
+        <button onClick={handleReverFn}>Un-embed</button>
         <button onClick={handleClick}>Copy</button>
-        <button onClick={handleReverFn}>Un-inject</button>
+        <button onClick={handleShowPresets}>Presets</button>
       </div>
     </>
   );
 };
 
-export default CSS;
-
-{
-  /* <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Andika&display=swap" rel="stylesheet"></link> */
-}
+export default Embed;

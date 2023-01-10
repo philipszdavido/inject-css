@@ -1,25 +1,15 @@
 import "./App.css";
-import CSS from "./CSS";
-import Embed from "./Embed";
-import { Tab, TabContent } from "./Tab";
+import Dashboard from "./components/Dashboard";
+import Popup from "./containers/Popup";
 
 function App() {
-  return (
-    <div className="App">
-      <header>
-        <div className="headerTitle">Inject CSS 💉</div>
-      </header>
+  const href = window.location.href;
 
-      <Tab heads={["CSS", "EMBED"]}>
-        <TabContent>
-          <CSS />
-        </TabContent>
-        <TabContent>
-          <Embed />
-        </TabContent>
-      </Tab>
-    </div>
-  );
+  const isNewTab = href.endsWith("?new-tab");
+  if (isNewTab) {
+    return <Dashboard />;
+  }
+  return <Popup />;
 }
 
 export default App;

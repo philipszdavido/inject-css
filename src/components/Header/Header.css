@@ -1,0 +1,11 @@
+header {
+  font-size: medium;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
+.headerTitle {
+  font-size: medium;
+}

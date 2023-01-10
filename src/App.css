@@ -1,15 +1,27 @@
+* {
+  --var-height: 100vh;
+  --var-width: 400px;
+  --primary-color: #282c34;
+  --button-hover-bg: #282c34d0;
+}
+
 html {
-  height: 300px;
-  width: 300px;
+  height: var(--var-height);
+  width: var(--var-width);
+}
+
+ul {
+  list-style: none;
+  margin: unset !important;
+  padding: unset !important;
 }
 
 .App {
-  /* text-align: center; */
 }
 
 header {
   height: 40px;
-  background: #282c34;
+  background: var(--primary-color);
   display: flex;
   color: white;
   padding: 10px;
@@ -17,21 +29,10 @@ header {
   font-size: x-large;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 button {
   border: none;
   border-radius: 3px;
-  background: #282c34;
+  background: var(--primary-color);
   line-height: 2;
   color: white;
   font-size: 0.9rem;
@@ -40,7 +41,7 @@ button {
 }
 
 button:hover {
-  background: #282c34d0;
+  background: var(--button-hover-bg);
 }
 
 .element {
@@ -125,28 +126,6 @@ button:hover {
   background: red;
 }
 
-.tabHeadContainer {
-  display: flex;
-  list-style: none;
-  margin-bottom: 0;
-  padding-left: 3px;
-}
-
-.tabHeadItem {
-  cursor: pointer;
-  padding: 5px;
-  border: 1px solid #aba9a9;
-  margin-right: 2px;
-  border-top-right-radius: 2px;
-  border-top-left-radius: 2px;
-  border-bottom: unset;
-}
-
-.tabActive {
-  border: 1px solid black;
-  border-bottom: unset;
-}
-
-.headerTitle {
-  font-size: medium;
+.cm-editor {
+  width: unset !important;
 }

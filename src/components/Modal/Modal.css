@@ -1,0 +1,44 @@
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: white;
+  height: var(--var-height);
+  width: var(--var-width);
+}
+
+.modal-header {
+  height: 40px;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 9px;
+}
+
+.modal-body {
+}
+
+.EmbedPresetsModal {
+  height: 300px;
+  overflow-y: auto;
+}
+
+.EmbedPresetsModal li {
+  padding: 6px 7px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  cursor: pointer;
+}
+
+.EmbedPresetsModal li:hover {
+  background: lightgrey;
+}
+
+.EmbedPresetsModal .selected {
+  background: #cbc6c6 !important;
+}
